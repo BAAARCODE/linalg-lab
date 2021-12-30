@@ -24,17 +24,14 @@ c.addEventListener('mousemove', e => {
     mouseVect = toUnits({x: e.offsetX, y: e.offsetY});
     ctx.clearRect(0, 0, c.width, c.height);
 
-    ctx.globalAlpha = 0.2;
-    drawOriginVector(ihat, "turquoise");
-    drawOriginVector(jhat, "orange");
-    ctx.globalAlpha = 1;
-
     linearCombination();
+    
+    drawVector(scalarMult(scalars[1], jhat), scalarMult(scalars[0], ihat), "#103834");
+    drawVector(scalarMult(scalars[0], ihat), scalarMult(scalars[1], jhat), "#402900");
+    
     drawOriginVector(scalarMult(scalars[0], ihat), "turquoise");
-    drawVector(scalarMult(scalars[0], ihat), scalarMult(scalars[1], jhat), "orange");
-    // drawOriginVector(scalarMult(scalars[1], jhat), "blue", 2);
-    // drawVector(scalarMult(scalars[1], jhat), scalarMult(scalars[0], ihat), "red", 2);
-
+    drawOriginVector(scalarMult(scalars[1], jhat), "orange");
+    
     drawOriginVector(mouseVect, "white", 2);
 
     fillCircle(centre.x, centre.y, 5, "white");
