@@ -151,7 +151,15 @@ function drawVector(origin, vector, style)
         if (vector.y > 0) angle = Math.PI / 2;
         else angle = -Math.PI / 2;
     }
-    drawLine(uo.x, uo.y, u.x + arrowheadLength / 2 * Math.cos(angle), u.y + arrowheadLength / 2 * Math.sin(angle), style, vectorWidth);
+
+    drawLine(
+        uo.x,
+        uo.y,
+        u.x + Math.min(vectorLength(vector) * unitLength, arrowheadLength / 2) * Math.cos(angle),
+        u.y + Math.min(vectorLength(vector) * unitLength, arrowheadLength / 2) * Math.sin(angle),
+        style,
+        vectorWidth
+        );
     fillArrowHead(u.x, u.y, angle, Math.PI / 6, Math.min(arrowheadLength, vectorLength(vector) * unitLength), style);
 }
 
