@@ -1,10 +1,12 @@
-var c = document.getElementById("graph");
+var c = document.getElementById("vectors");
 var ctx = c.getContext("2d");
 
 c.width = window.innerWidth;
 c.height = window.innerHeight;
 
-var unitLength = 100.0;
+var unitLength = 50.0;
+
+const origin = {x: 0, y: 0};
 
 var centre = {x: c.width / 2, y: c.height / 2};
 
