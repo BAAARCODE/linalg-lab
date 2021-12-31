@@ -24,6 +24,7 @@ var arrowheadLength = 25;
 
 c.addEventListener('mousemove', e => {
     mouseVect = toUnits({x: e.offsetX, y: e.offsetY});
+    
     ctx.clearRect(0, 0, c.width, c.height);
 
     linearCombination();
@@ -39,10 +40,11 @@ c.addEventListener('mousemove', e => {
     fillCircle(centre.x, centre.y, 5, "white");
   });
 
-  function resizeCanvas() {
+  function resizeCanvas() {    
     c.width = window.innerWidth;
     c.height = window.innerHeight;
     centre = {x: c.width / 2, y: c.height / 2};
+    drawGrid(ihat, jhat, 5, 100, 5, 1);
   }
   
 window.onresize = resizeCanvas;

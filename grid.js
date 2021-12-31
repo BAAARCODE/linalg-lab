@@ -6,6 +6,9 @@ gc.height = window.innerHeight;
 
 function drawGrid(vector1, vector2, length, centreColour, axisWidth, minorWidth)
 {
+    gc.width = window.innerWidth;
+    gc.height = window.innerHeight;
+    gctx.clearRect(0, 0, gc.width, gc.height);
     for (var i = -length + 1; i < length; i++)
     {
         drawGridLine(scalarMult(i, vector1), vector2, length, centreColour - centreColour / length * Math.abs(i), minorWidth);
