@@ -6,6 +6,26 @@ body, html {
     overflow: hidden;
     background-color: black;
 }
+
+#toggle, #optionList {
+    display: inline-block;
+    background-color: lightgrey;
+    padding: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#toggle {
+    cursor: pointer;
+}
+
+#options {
+    text-align: right;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 canvas {
     position: absolute;
     cursor: none;
