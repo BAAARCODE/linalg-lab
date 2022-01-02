@@ -1,4 +1,7 @@
-var g = document.getElementById("optionList");
+var g = document.getElementById("option-list");
+
+var select_bg = document.getElementById("options-background");
+var option_bg = select_bg.value;
 
 g.style.display = 'none';
 
@@ -13,3 +16,8 @@ function toggleOptions()
         g.style.display = 'none';
     }
 }
+
+select_bg.addEventListener('change', e => {
+    option_bg = select_bg.value;
+    drawBackground();
+});

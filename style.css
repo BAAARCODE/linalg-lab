@@ -20,7 +20,7 @@ label {
     line-height: 150%;
 }
 
-#toggle, #optionList {
+#toggle, #option-list {
     display: inline-block;
     background-color: lightgrey;
     padding: 5px;
@@ -32,7 +32,7 @@ label {
     cursor: pointer;
 }
 
-#optionList {
+#option-list {
     text-align: left;
 }
 

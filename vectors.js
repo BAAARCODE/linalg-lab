@@ -13,6 +13,8 @@ var centre = {x: c.width / 2, y: c.height / 2};
 var u = {x: 1, y: 2};
 var v = {x: -1, y: 2};
 var mouseVect = {x: 0, y: 0};
+var ihat = {x: 1, y: 0};
+var jhat = {x: 0, y: 1};
 
 var scalars = [0, 0];
 
@@ -29,22 +31,22 @@ c.addEventListener('mousemove', e => {
 
     linearCombination();
     
-    drawVector(scalarMult(scalars[1], v), scalarMult(scalars[0], u), "#103834");
-    drawVector(scalarMult(scalars[0], u), scalarMult(scalars[1], v), "#402900");
+    drawVector(ctx, scalarMult(scalars[1], v), scalarMult(scalars[0], u), "#103834");
+    drawVector(ctx, scalarMult(scalars[0], u), scalarMult(scalars[1], v), "#402900");
     
-    drawOriginVector(scalarMult(scalars[0], u), "turquoise");
-    drawOriginVector(scalarMult(scalars[1], v), "orange");
+    drawOriginVector(ctx, scalarMult(scalars[0], u), "turquoise");
+    drawOriginVector(ctx, scalarMult(scalars[1], v), "orange");
     
-    drawOriginVector(mouseVect, "white", 2);
+    drawOriginVector(ctx, mouseVect, "white", 2);
 
-    fillCircle(centre.x, centre.y, 5, "white");
+    fillCircle(ctx, centre.x, centre.y, 5, "white");
   });
 
   function resizeCanvas() {    
     c.width = window.innerWidth;
     c.height = window.innerHeight;
     centre = {x: c.width / 2, y: c.height / 2};
-    drawGrid(u, v, 5, 100, 5, 1);
+    drawBackground();
   }
   
 window.onresize = resizeCanvas;
@@ -128,12 +130,12 @@ function linearCombination()
     scalars = [augmat[0][2], augmat[1][2]];
 }
 
-function drawOriginVector(vector, style)
+function drawOriginVector(context, vector, style)
 {
-    drawVector({x: 0, y:0}, vector, style);
+    drawVector(context, {x: 0, y:0}, vector, style);
 }
 
-function drawVector(origin, vector, style)
+function drawVector(context, origin, vector, style)
 {
     let uo = toPixels(origin);
     let u = toPixels(vectorAdd(vector, origin));
@@ -154,6 +156,7 @@ function drawVector(origin, vector, style)
     }
 
     drawLine(
+        context,
         uo.x,
         uo.y,
         u.x + Math.min(vectorLength(vector) * unitLength, arrowheadLength / 2) * Math.cos(angle),
@@ -161,7 +164,7 @@ function drawVector(origin, vector, style)
         style,
         vectorWidth
         );
-    fillArrowHead(u.x, u.y, angle, Math.PI / 6, Math.min(arrowheadLength, vectorLength(vector) * unitLength), style);
+    fillArrowHead(context, u.x, u.y, angle, Math.PI / 6, Math.min(arrowheadLength, vectorLength(vector) * unitLength), style);
 }
 
 function vectorLength(v)
@@ -169,13 +172,13 @@ function vectorLength(v)
     return Math.sqrt(v.x * v.x + v.y * v.y);
 }
 
-function fillArrowHead(x, y, dir, angleWidth, length, style)
+function fillArrowHead(context, x, y, dir, angleWidth, length, style)
 {
     let pos = {x: x, y: y};
 
-    ctx.beginPath();
+    context.beginPath();
     
-    ctx.moveTo(x, y);
+    context.moveTo(x, y);
     
     let sideLength = length * Math.cos(angleWidth / 2);
     let circleRadius = length * Math.sin(angleWidth / 2);
@@ -183,42 +186,42 @@ function fillArrowHead(x, y, dir, angleWidth, length, style)
     let firstLineAngle = dir - (Math.PI - angleWidth / 2) + Math.PI;
     pos.x += sideLength * Math.cos(firstLineAngle);
     pos.y += sideLength * Math.sin(firstLineAngle);
-    ctx.lineTo(pos.x, pos.y);
+    context.lineTo(pos.x, pos.y);
     
     let circleAngle = firstLineAngle + Math.PI / 2 + Math.PI;
     pos.x += circleRadius * Math.cos(circleAngle);
     pos.y += circleRadius * Math.sin(circleAngle);
-    ctx.lineTo(pos.x, pos.y);
+    context.lineTo(pos.x, pos.y);
 
     let circlePos = {x: pos.x, y: pos.y};
 
     pos.x -= circleRadius * Math.cos(circleAngle + (Math.PI - angleWidth));
     pos.y -= circleRadius * Math.sin(circleAngle + (Math.PI - angleWidth));
-    ctx.lineTo(pos.x, pos.y);
+    context.lineTo(pos.x, pos.y);
 
-    ctx.fillStyle = style;
-    ctx.fill();
-    ctx.closePath();
+    context.fillStyle = style;
+    context.fill();
+    context.closePath();
 
-    // ctx.fillCircle(circlePos.x, circlePos.y, circleRadius, "white");
+    // context.fillCircle(circlePos.x, circlePos.y, circleRadius, "white");
 }
 
-function fillCircle(x, y, radius, style)
+function fillCircle(context, x, y, radius, style)
 {
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = style;
-    ctx.fill();
-    ctx.closePath();
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    context.fillStyle = style;
+    context.fill();
+    context.closePath();
 }
 
-function drawLine(x1, y1, x2, y2, style, width)
+function drawLine(context, x1, y1, x2, y2, style, width)
 {
-    ctx.beginPath();
-    ctx.strokeStyle = style;
-    ctx.lineWidth = width;
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-    ctx.closePath();
+    context.beginPath();
+    context.strokeStyle = style;
+    context.lineWidth = width;
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
+    context.closePath();
 }

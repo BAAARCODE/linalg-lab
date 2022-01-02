@@ -4,6 +4,29 @@ var gctx = gc.getContext("2d");
 gc.width = window.innerWidth;
 gc.height = window.innerHeight;
 
+function drawBackground()
+{
+    gctx.clearRect(0, 0, gc.width, gc.height);
+    switch (option_bg)
+    {
+        case "grid":
+            drawGrid(ihat, jhat, 10, 100, 5, 1);
+            break;
+        case "vectors":
+            drawOriginVector(gctx, u, "#103834");
+            drawOriginVector(gctx, v, "#402900");
+            break;
+        case "grid-vectors":
+            drawGrid(ihat, jhat, 10, 100, 5, 1);
+            drawOriginVector(gctx, u, "#103834");
+            drawOriginVector(gctx, v, "#402900");
+            break;
+        case "coefficient-grid":
+            drawGrid(u, v, 10, 100, 5, 1);
+            break;
+    }
+}
+
 function drawGrid(vector1, vector2, length, centreColour, axisWidth, minorWidth)
 {
     gc.width = window.innerWidth;
@@ -37,4 +60,4 @@ function drawGridLine(originVector, vector, length, centreColour, width)
     gctx.closePath();
 }
 
-drawGrid(u, v, 5, 100, 5, 1);
+drawBackground();
