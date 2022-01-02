@@ -14,8 +14,8 @@ function drawGrid(vector1, vector2, length, centreColour, axisWidth, minorWidth)
         drawGridLine(scalarMult(i, vector1), vector2, length, centreColour - centreColour / length * Math.abs(i), minorWidth);
         drawGridLine(scalarMult(i, vector2), vector1, length, centreColour - centreColour / length * Math.abs(i), minorWidth);
     }
-    drawGridLine(origin, ihat, length, centreColour, axisWidth);
-    drawGridLine(origin, jhat, length, centreColour, axisWidth);
+    drawGridLine(origin, vector1, length, centreColour, axisWidth);
+    drawGridLine(origin, vector2, length, centreColour, axisWidth);
 }
 
 function drawGridLine(originVector, vector, length, centreColour, width)
@@ -37,4 +37,4 @@ function drawGridLine(originVector, vector, length, centreColour, width)
     gctx.closePath();
 }
 
-drawGrid(ihat, jhat, 5, 100, 5, 1);
+drawGrid(u, v, 5, 100, 5, 1);

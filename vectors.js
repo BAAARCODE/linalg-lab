@@ -10,8 +10,8 @@ const origin = {x: 0, y: 0};
 
 var centre = {x: c.width / 2, y: c.height / 2};
 
-var ihat = {x: 1, y: 2};
-var jhat = {x: -1, y: 2};
+var u = {x: 1, y: 2};
+var v = {x: -1, y: 2};
 var mouseVect = {x: 0, y: 0};
 
 var scalars = [0, 0];
@@ -29,11 +29,11 @@ c.addEventListener('mousemove', e => {
 
     linearCombination();
     
-    drawVector(scalarMult(scalars[1], jhat), scalarMult(scalars[0], ihat), "#103834");
-    drawVector(scalarMult(scalars[0], ihat), scalarMult(scalars[1], jhat), "#402900");
+    drawVector(scalarMult(scalars[1], v), scalarMult(scalars[0], u), "#103834");
+    drawVector(scalarMult(scalars[0], u), scalarMult(scalars[1], v), "#402900");
     
-    drawOriginVector(scalarMult(scalars[0], ihat), "turquoise");
-    drawOriginVector(scalarMult(scalars[1], jhat), "orange");
+    drawOriginVector(scalarMult(scalars[0], u), "turquoise");
+    drawOriginVector(scalarMult(scalars[1], v), "orange");
     
     drawOriginVector(mouseVect, "white", 2);
 
@@ -44,7 +44,7 @@ c.addEventListener('mousemove', e => {
     c.width = window.innerWidth;
     c.height = window.innerHeight;
     centre = {x: c.width / 2, y: c.height / 2};
-    drawGrid(ihat, jhat, 5, 100, 5, 1);
+    drawGrid(u, v, 5, 100, 5, 1);
   }
   
 window.onresize = resizeCanvas;
@@ -72,8 +72,8 @@ function toPixels(v)
 function linearCombination()
 {
     var augmat = [
-        [ihat.x, jhat.x, mouseVect.x],
-        [ihat.y, jhat.y, mouseVect.y]
+        [u.x, v.x, mouseVect.x],
+        [u.y, v.y, mouseVect.y]
     ];
 
     // Set first entry of first row to 1 via row operations
