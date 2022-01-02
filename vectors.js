@@ -13,6 +13,7 @@ var centre = {x: c.width / 2, y: c.height / 2};
 var u = {x: 1, y: 2};
 var v = {x: -1, y: 2};
 var mouseVect = {x: 0, y: 0};
+var targetVector = {x: 0, y: 0};
 var ihat = {x: 1, y: 0};
 var jhat = {x: 0, y: 1};
 
@@ -26,10 +27,25 @@ var arrowheadLength = 25;
 
 c.addEventListener('mousemove', e => {
     mouseVect = toUnits({x: e.offsetX, y: e.offsetY});
+
+    if (option_snap == "coordinates")
+    {
+        targetVector = {x: Math.round(mouseVect.x), y: Math.round(mouseVect.y)};
+    }
+    else
+    {
+        targetVector = mouseVect;
+    }
     
     ctx.clearRect(0, 0, c.width, c.height);
 
     linearCombination();
+
+    if (option_snap == "coefficients")
+    {
+        scalars = [Math.round(scalars[0]), Math.round(scalars[1])];
+        targetVector = vectorAdd(scalarMult(scalars[0], u), scalarMult(scalars[1], v));
+    }
     
     drawVector(ctx, scalarMult(scalars[1], v), scalarMult(scalars[0], u), "#103834");
     drawVector(ctx, scalarMult(scalars[0], u), scalarMult(scalars[1], v), "#402900");
@@ -37,7 +53,7 @@ c.addEventListener('mousemove', e => {
     drawOriginVector(ctx, scalarMult(scalars[0], u), "turquoise");
     drawOriginVector(ctx, scalarMult(scalars[1], v), "orange");
     
-    drawOriginVector(ctx, mouseVect, "white", 2);
+    drawOriginVector(ctx, targetVector, "white", 2);
 
     fillCircle(ctx, centre.x, centre.y, 5, "white");
   });
@@ -74,8 +90,8 @@ function toPixels(v)
 function linearCombination()
 {
     var augmat = [
-        [u.x, v.x, mouseVect.x],
-        [u.y, v.y, mouseVect.y]
+        [u.x, v.x, targetVector.x],
+        [u.y, v.y, targetVector.y]
     ];
 
     // Set first entry of first row to 1 via row operations
