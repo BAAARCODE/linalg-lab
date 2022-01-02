@@ -27,6 +27,8 @@ var arrowheadLength = 25;
 
 c.addEventListener('mousemove', e =>
 {
+    ctx.clearRect(0, 0, c.width, c.height);
+
     mouseVect = toUnits({x: e.offsetX, y: e.offsetY});
 
     if (option_snap == "coordinates")
@@ -37,8 +39,6 @@ c.addEventListener('mousemove', e =>
     {
         targetVector = mouseVect;
     }
-    
-    ctx.clearRect(0, 0, c.width, c.height);
 
     linearCombination();
 
@@ -57,6 +57,11 @@ c.addEventListener('mousemove', e =>
     drawOriginVector(ctx, targetVector, "white", 2);
 
     fillCircle(ctx, centre.x, centre.y, 5, "white");
+
+    if (option_snap != "none")
+    {
+        fillCircle(ctx, e.offsetX, e.offsetY, 7, "rgba(255, 255, 255, 0.4)");
+    }
 });
 
 function resizeCanvas()
