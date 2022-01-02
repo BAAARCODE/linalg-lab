@@ -25,7 +25,8 @@ var mouseY = 0;
 var vectorWidth = 4;
 var arrowheadLength = 25;
 
-c.addEventListener('mousemove', e => {
+c.addEventListener('mousemove', e =>
+{
     mouseVect = toUnits({x: e.offsetX, y: e.offsetY});
 
     if (option_snap == "coordinates")
@@ -56,14 +57,15 @@ c.addEventListener('mousemove', e => {
     drawOriginVector(ctx, targetVector, "white", 2);
 
     fillCircle(ctx, centre.x, centre.y, 5, "white");
-  });
+});
 
-  function resizeCanvas() {    
+function resizeCanvas()
+{    
     c.width = window.innerWidth;
     c.height = window.innerHeight;
     centre = {x: c.width / 2, y: c.height / 2};
     drawBackground();
-  }
+}
   
 window.onresize = resizeCanvas;
 
