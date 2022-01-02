@@ -8,6 +8,25 @@ body, html {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+.input-basis-vectors {
+    display: inline-block;
+}
+
+.input-vector-label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.input-vector {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+input {
+    display: block;
+    width: 2em;
+}
+
 select {
     width: 100%;
     margin-bottom: 5px;
