@@ -17,6 +17,7 @@ select {
 label {
     display: block;
     font-size: 1em;
+    line-height: 150%;
 }
 
 #toggle, #optionList {
