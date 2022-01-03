@@ -22,9 +22,20 @@ body, html {
     vertical-align: middle;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 input {
     display: block;
     width: 2em;
+    font-size: 1em;
 }
 
 select {
