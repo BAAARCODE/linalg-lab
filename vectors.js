@@ -19,17 +19,19 @@ var jhat = {x: 0, y: 1};
 
 var scalars = [0, 0];
 
-var mouseX = 0;
-var mouseY = 0;
-
 var vectorWidth = 4;
 var arrowheadLength = 25;
 
 c.addEventListener('mousemove', e =>
 {
+    redraw(e.offsetX, e.offsetY);
+});
+
+function redraw(mouseX, mouseY)
+{
     ctx.clearRect(0, 0, c.width, c.height);
 
-    mouseVect = toUnits({x: e.offsetX, y: e.offsetY});
+    mouseVect = toUnits({x: mouseX, y: mouseY});
 
     if (option_snap == "coordinates")
     {
@@ -62,7 +64,7 @@ c.addEventListener('mousemove', e =>
     {
         fillCircle(ctx, e.offsetX, e.offsetY, 7, "rgba(255, 255, 255, 0.4)");
     }
-});
+}
 
 function updateVector(vector)
 {
