@@ -6,6 +6,33 @@ var option_bg = select_bg.value;
 var select_snap = document.getElementById("options-snap");
 var option_snap = select_snap.value;
 
+var input_vectors = 
+{
+    u:
+    {
+        x: document.getElementById("u-x"),
+        y: document.getElementById("u-y")
+    },
+    v:
+    {
+        x: document.getElementById("v-x"),
+        y: document.getElementById("v-y")
+    }
+}
+var option_vectors = 
+{
+    u:
+    {
+        x: input_vectors.u.x.value,
+        y: input_vectors.u.y.value
+    },
+    v:
+    {
+        x: input_vectors.v.x.value,
+        y: input_vectors.v.y.value
+    }
+}
+
 g.style.display = 'none';
 
 function toggleOptions()
@@ -28,3 +55,12 @@ select_bg.addEventListener('change', e => {
 select_snap.addEventListener('change', e => {
     option_snap = select_snap.value;
 });
+
+for (const [key_vect, val_vect] of Object.entries(input_vectors)) {
+    for (const [key_axis, val_axis] of Object.entries(val_vect)) {
+        val_axis.addEventListener('change', e => {
+            option_vectors[key_vect][key_axis] = val_axis.value;
+            updateVector(key_vect);
+        });
+    } 
+}

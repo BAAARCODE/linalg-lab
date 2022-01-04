@@ -4,7 +4,7 @@ var ctx = c.getContext("2d");
 c.width = window.innerWidth;
 c.height = window.innerHeight;
 
-var unitLength = 50.0;
+const unitLength = 50.0;
 
 const origin = {x: 0, y: 0};
 
@@ -40,6 +40,11 @@ c.addEventListener('mousemove', e =>
         targetVector = mouseVect;
     }
 
+    ctx.fillText(u.x, 10, 10);
+    ctx.fillText(u.y, 10, 100);
+    ctx.fillText(v.x, 10, 200);
+    ctx.fillText(v.y, 10, 300);
+
     linearCombination();
 
     if (option_snap == "coefficients")
@@ -63,6 +68,13 @@ c.addEventListener('mousemove', e =>
         fillCircle(ctx, e.offsetX, e.offsetY, 7, "rgba(255, 255, 255, 0.4)");
     }
 });
+
+function updateVector(vector)
+{
+    window[vector].x = option_vectors[vector].x;
+    window[vector].y = option_vectors[vector].y;
+    drawBackground();
+}
 
 function resizeCanvas()
 {    
