@@ -39,7 +39,7 @@ c.addEventListener('mousemove', e =>
     {
         targetVector = mouseVect;
     }
-    
+
     linearCombination();
 
     if (option_snap == "coefficients")
@@ -122,6 +122,12 @@ function linearCombination()
         let temp = augmat[0];
         augmat[0] = augmat[1];
         augmat[1] = temp;
+
+        let f = augmat[0][0];
+        for (let i = 0; i < augmat[0].length; i++)
+        {
+            augmat[0][i] /= f;
+        }
     }
     else
     {
