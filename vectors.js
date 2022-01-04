@@ -10,8 +10,8 @@ const origin = {x: 0, y: 0};
 
 var centre = {x: c.width / 2, y: c.height / 2};
 
-var u = {x: 1, y: 2};
-var v = {x: -1, y: 2};
+var u = option_vectors.u;
+var v = option_vectors.v;
 var mouseVect = {x: 0, y: 0};
 var targetVector = {x: 0, y: 0};
 var ihat = {x: 1, y: 0};
@@ -39,12 +39,7 @@ c.addEventListener('mousemove', e =>
     {
         targetVector = mouseVect;
     }
-
-    ctx.fillText(u.x, 10, 10);
-    ctx.fillText(u.y, 10, 100);
-    ctx.fillText(v.x, 10, 200);
-    ctx.fillText(v.y, 10, 300);
-
+    
     linearCombination();
 
     if (option_snap == "coefficients")

@@ -23,13 +23,13 @@ var option_vectors =
 {
     u:
     {
-        x: input_vectors.u.x.value,
-        y: input_vectors.u.y.value
+        x: parseInt(input_vectors.u.x.value),
+        y: parseInt(input_vectors.u.y.value)
     },
     v:
     {
-        x: input_vectors.v.x.value,
-        y: input_vectors.v.y.value
+        x: parseInt(input_vectors.v.x.value),
+        y: parseInt(input_vectors.v.y.value)
     }
 }
 

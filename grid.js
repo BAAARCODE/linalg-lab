@@ -6,20 +6,24 @@ gc.height = window.innerHeight;
 
 function drawBackground()
 {
+    gc.width = window.innerWidth;
+    gc.height = window.innerHeight;
+
     gctx.clearRect(0, 0, gc.width, gc.height);
+
     switch (option_bg)
     {
         case "grid":
             drawGrid(ihat, jhat, 10, 100, 5, 1);
             break;
         case "vectors":
-            drawOriginVector(gctx, u, "#103834");
-            drawOriginVector(gctx, v, "#402900");
+            drawOriginVector(gctx, scalarMult(1, u), "#103834");
+            drawOriginVector(gctx, scalarMult(1, v), "#402900");
             break;
         case "grid-vectors":
             drawGrid(ihat, jhat, 10, 100, 5, 1);
-            drawOriginVector(gctx, u, "#103834");
-            drawOriginVector(gctx, v, "#402900");
+            drawOriginVector(gctx, scalarMult(1, u), "#103834");
+            drawOriginVector(gctx, scalarMult(1, v), "#402900");
             break;
         case "coefficient-grid":
             drawGrid(u, v, 10, 100, 5, 1);
@@ -29,9 +33,6 @@ function drawBackground()
 
 function drawGrid(vector1, vector2, length, centreColour, axisWidth, minorWidth)
 {
-    gc.width = window.innerWidth;
-    gc.height = window.innerHeight;
-    gctx.clearRect(0, 0, gc.width, gc.height);
     for (var i = -length + 1; i < length; i++)
     {
         drawGridLine(scalarMult(i, vector1), vector2, length, centreColour - centreColour / length * Math.abs(i), minorWidth);
