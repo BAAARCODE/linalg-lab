@@ -43,12 +43,16 @@ document.addEventListener('keydown', e =>
             {
                 movingVector = "none";
                 option_snap = select_snap.value;
+                option_bg = select_bg.value;
                 drawBackground();
+                redraw(origin);
             }
             else 
             {
                 movingVector = e.key;
                 option_snap = "coordinates";
+                option_bg = "grid";
+                drawBackground();
             }
             break;
     }
