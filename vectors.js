@@ -22,24 +22,54 @@ var scalars = [0, 0];
 var vectorWidth = 4;
 var arrowheadLength = 25;
 
+var movingVector = "targetVector";
+
 c.addEventListener('mousemove', e =>
 {
-    redraw(e.offsetX, e.offsetY);
+    redraw({x: e.offsetX, y: e.offsetY});
 });
 
-function redraw(mouseX, mouseY)
+document.addEventListener('keydown', e =>
+{
+    switch (e.key)
+    {
+        case " ":
+            if (movingVector == "targetVector") movingVector = "none";
+            else movingVector = "targetVector";
+            break;
+        case "u":  
+        case "v":
+            if (movingVector == e.key)
+            {
+                movingVector = "none";
+                option_snap = select_snap.value;
+                drawBackground();
+            }
+            else 
+            {
+                movingVector = e.key;
+                option_snap = "coordinates";
+            }
+            break;
+    }
+});
+
+function redraw(mouseVector)
 {
     ctx.clearRect(0, 0, c.width, c.height);
 
-    mouseVect = toUnits({x: mouseX, y: mouseY});
+    mouseVect = toUnits(mouseVector);
 
-    if (option_snap == "coordinates")
+    if (movingVector != "none")
     {
-        targetVector = {x: Math.round(mouseVect.x), y: Math.round(mouseVect.y)};
-    }
-    else
-    {
-        targetVector = mouseVect;
+        if (option_snap == "coordinates")
+        {
+            window[movingVector] = {x: Math.round(mouseVect.x), y: Math.round(mouseVect.y)};
+        }
+        else
+        {
+            window[movingVector] = mouseVect;
+        }
     }
 
     linearCombination();
@@ -47,22 +77,33 @@ function redraw(mouseX, mouseY)
     if (option_snap == "coefficients")
     {
         scalars = [Math.round(scalars[0]), Math.round(scalars[1])];
-        targetVector = vectorAdd(scalarMult(scalars[0], u), scalarMult(scalars[1], v));
+        window[movingVector] = vectorAdd(scalarMult(scalars[0], u), scalarMult(scalars[1], v));
     }
     
-    drawVector(ctx, scalarMult(scalars[1], v), scalarMult(scalars[0], u), "#103834");
-    drawVector(ctx, scalarMult(scalars[0], u), scalarMult(scalars[1], v), "#402900");
-    
-    drawOriginVector(ctx, scalarMult(scalars[0], u), "turquoise");
-    drawOriginVector(ctx, scalarMult(scalars[1], v), "orange");
+    if (movingVector != "u" && movingVector != "v")
+    {
+        drawVector(ctx, scalarMult(scalars[1], v), scalarMult(scalars[0], u), "#103834");
+        drawVector(ctx, scalarMult(scalars[0], u), scalarMult(scalars[1], v), "#402900");
+
+        drawOriginVector(ctx, scalarMult(scalars[0], u), "turquoise");
+        drawOriginVector(ctx, scalarMult(scalars[1], v), "orange");
+    }
+    else
+    {
+        input_vectors[movingVector].x.value = window[movingVector].x;
+        input_vectors[movingVector].y.value = window[movingVector].y;
+
+        drawOriginVector(ctx, scalarMult(1, u), "turquoise");
+        drawOriginVector(ctx, scalarMult(1, v), "orange");
+    }
     
     drawOriginVector(ctx, targetVector, "white", 2);
 
     fillCircle(ctx, centre.x, centre.y, 5, "white");
 
-    if (option_snap != "none")
+    if (option_snap != "none" || movingVector == "none")
     {
-        fillCircle(ctx, e.offsetX, e.offsetY, 7, "rgba(255, 255, 255, 0.4)");
+        fillCircle(ctx, mouseVector.x, mouseVector.y, 7, "rgba(255, 255, 255, 0.4)");
     }
 }
 
@@ -71,6 +112,7 @@ function updateVector(vector)
     window[vector].x = option_vectors[vector].x;
     window[vector].y = option_vectors[vector].y;
     drawBackground();
+    redraw(origin);
 }
 
 function resizeCanvas()
