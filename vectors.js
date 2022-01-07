@@ -109,6 +109,8 @@ function redraw(mouseVector)
     {
         fillCircle(ctx, mouseVector.x, mouseVector.y, 7, "rgba(255, 255, 255, 0.4)");
     }
+
+    renderEquation();
 }
 
 function updateVector(vector)
