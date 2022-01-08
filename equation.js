@@ -1,7 +1,31 @@
 var equationDiv = document.getElementById("equation");
+var rounded = false; 
+
+const equals = "=";
+const approx = "\\approx";
 
 function renderEquation()
 {
+    rounded = false;
+    var vars = {
+        a: round1(scalars[0]),
+        b: round1(scalars[1]),
+        ux: round1(u.x),
+        uy: round1(u.y),
+        vx: round1(v.x),
+        vy: round1(v.y),
+        mux: round1(scalarMult(scalars[0], u).x),
+        muy: round1(scalarMult(scalars[0], u).y),
+        mvx: round1(scalarMult(scalars[1], v).x),
+        mvy: round1(scalarMult(scalars[1], v).y),
+        tx: round1(targetVector.x),
+        ty: round1(targetVector.y)
+    }
+
+    var eqSymbol;
+    if (rounded) eqSymbol = approx;
+    else eqSymbol = equals;
+
     katex.render(
         `
         \\color{white}
@@ -9,39 +33,43 @@ function renderEquation()
         \\vec{w} =
     
         a\\textcolor{turquoise}{\\vec{u}} +
-        b\\textcolor{orange}{\\vec{v}} =
+        b\\textcolor{orange}{\\vec{v}} ${eqSymbol}
     
-        ${round1(scalars[0])}\\textcolor{turquoise}{
+        ${vars.a}\\textcolor{turquoise}{
             \\begin{bmatrix}
-                ${round1(u.x)} \\\\ ${round1(u.y)}
+                ${vars.ux} \\\\ ${vars.uy}
             \\end{bmatrix}
         } +
-        ${round1(scalars[1])}\\textcolor{orange}{
+        ${vars.b}\\textcolor{orange}{
             \\begin{bmatrix}
-                ${round1(v.x)} \\\\ ${round1(v.y)}
+                ${vars.vx} \\\\ ${vars.vy}
             \\end{bmatrix}
-        } =
+        } ${eqSymbol}
     
         \\textcolor{turquoise}{
             \\begin{bmatrix}
-                ${round1(scalarMult(scalars[0], u).x)} \\\\
-                ${round1(scalarMult(scalars[0], u).y)}
+                ${vars.mux} \\\\
+                ${vars.muy}
             \\end{bmatrix}
         } +
         \\textcolor{orange}{
             \\begin{bmatrix}
-                ${round1(scalarMult(scalars[1], v).x)} \\\\
-                ${round1(scalarMult(scalars[1], v).y)}
+                ${vars.mvx} \\\\
+                ${vars.mvy}
             \\end{bmatrix}
-        } =
+        } ${eqSymbol}
     
-        \\begin{bmatrix} ${round1(targetVector.x)} \\\\ ${round1(targetVector.y)} \\end{bmatrix}
+        \\begin{bmatrix} ${vars.tx} \\\\ ${vars.ty} \\end{bmatrix}
         `,
         equationDiv);
 }
 
 function round1(number)
 {
-    if (("" + number).includes(".")) return number.toFixed(1);
+    if (("" + number).includes(".")) 
+    {
+        rounded = true;
+        return number.toFixed(1);
+    }
     return number;
 }
