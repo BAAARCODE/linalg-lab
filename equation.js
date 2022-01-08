@@ -66,7 +66,8 @@ function renderEquation()
 
 function round1(number)
 {
-    if (("" + number).includes(".")) 
+    const numString = "" + number;
+    if (numString.includes(".") && numString.substring(numString.indexOf(".")).length > 2) 
     {
         rounded = true;
         return number.toFixed(1);
