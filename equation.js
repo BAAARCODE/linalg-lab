@@ -11,31 +11,37 @@ function renderEquation()
         a\\textcolor{turquoise}{\\vec{u}} +
         b\\textcolor{orange}{\\vec{v}} =
     
-        ${scalars[0]}\\textcolor{turquoise}{
+        ${round1(scalars[0])}\\textcolor{turquoise}{
             \\begin{bmatrix}
-                ${u.x} \\\\ ${u.y}
+                ${round1(u.x)} \\\\ ${round1(u.y)}
             \\end{bmatrix}
         } +
-        ${scalars[1]}\\textcolor{orange}{
+        ${round1(scalars[1])}\\textcolor{orange}{
             \\begin{bmatrix}
-                ${v.x} \\\\ ${v.y}
+                ${round1(v.x)} \\\\ ${round1(v.y)}
             \\end{bmatrix}
         } =
     
         \\textcolor{turquoise}{
             \\begin{bmatrix}
-                ${scalarMult(scalars[0], u).x} \\\\
-                ${scalarMult(scalars[0], u).y}
+                ${round1(scalarMult(scalars[0], u).x)} \\\\
+                ${round1(scalarMult(scalars[0], u).y)}
             \\end{bmatrix}
         } +
         \\textcolor{orange}{
             \\begin{bmatrix}
-                ${scalarMult(scalars[1], v).x} \\\\
-                ${scalarMult(scalars[1], v).y}
+                ${round1(scalarMult(scalars[1], v).x)} \\\\
+                ${round1(scalarMult(scalars[1], v).y)}
             \\end{bmatrix}
         } =
     
-        \\begin{bmatrix} ${targetVector.x} \\\\ ${targetVector.y} \\end{bmatrix}
+        \\begin{bmatrix} ${round1(targetVector.x)} \\\\ ${round1(targetVector.y)} \\end{bmatrix}
         `,
         equationDiv);
+}
+
+function round1(number)
+{
+    if (("" + number).includes(".")) return number.toFixed(1);
+    return number;
 }
