@@ -24,9 +24,9 @@ var arrowheadLength = 25;
 
 var movingVector = "targetVector";
 
-c.addEventListener('mousemove', e =>
+window.addEventListener('mousemove', e =>
 {
-    redraw({x: e.offsetX, y: e.offsetY});
+    redraw({x: e.clientX, y: e.clientY});
 });
 
 document.addEventListener('keydown', e =>
