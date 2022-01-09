@@ -1,4 +1,4 @@
-var equationDiv = document.getElementById("equation");
+var equationDiv = document.getElementById("equation-span");
 var rounded = false; 
 
 const equals = "=";

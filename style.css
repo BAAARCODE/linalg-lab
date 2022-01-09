@@ -19,6 +19,12 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: none;
+}
+
+#equation-span {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.3em;
 }
 
 .input-basis-vectors {
