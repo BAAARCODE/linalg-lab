@@ -79,7 +79,7 @@ function redraw(mouseVector)
 
     linearCombination();
 
-    if (option_snap == "coefficients")
+    if (option_snap == "coefficients" && movingVector != "none")
     {
         scalars = [Math.round(scalars[0]), Math.round(scalars[1])];
         window[movingVector] = vectorAdd(scalarMult(scalars[0], u), scalarMult(scalars[1], v));
