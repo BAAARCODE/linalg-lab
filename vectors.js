@@ -36,6 +36,7 @@ document.addEventListener('keydown', e =>
         case " ":
             if (movingVector == "targetVector") movingVector = "none";
             else movingVector = "targetVector";
+            redraw(toPixels(mouseVect))
             break;
         case "u":  
         case "v":
@@ -105,7 +106,11 @@ function redraw(mouseVector)
 
     fillCircle(ctx, centre.x, centre.y, 5, "white");
 
-    if (option_snap != "none" || movingVector == "none")
+    if (movingVector == "none")
+    {
+        strokeCircle(ctx, mouseVector.x, mouseVector.y, 7, "rgba(255, 255, 255, 0.4)", 3);
+    }
+    else if (option_snap != "none")
     {
         fillCircle(ctx, mouseVector.x, mouseVector.y, 7, "rgba(255, 255, 255, 0.4)");
     }
@@ -298,6 +303,16 @@ function fillCircle(context, x, y, radius, style)
     context.arc(x, y, radius, 0, 2 * Math.PI, false);
     context.fillStyle = style;
     context.fill();
+    context.closePath();
+}
+
+function strokeCircle(context, x, y, radius, style, width)
+{
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    context.strokeStyle = style;
+    context.lineWidth = width;
+    context.stroke();
     context.closePath();
 }
 
