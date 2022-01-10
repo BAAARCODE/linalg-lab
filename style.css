@@ -51,10 +51,14 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-input {
+input[type="number"] {
     display: block;
     width: 2em;
     font-size: 1em;
+}
+
+input[type="checkbox"] {
+    display: inline;
 }
 
 select {
@@ -67,6 +71,12 @@ select {
 
 label {
     display: block;
+    font-size: 1em;
+    line-height: 150%;
+}
+
+label[for="show-equation-checkbox"] {
+    display: inline;
     font-size: 1em;
     line-height: 150%;
 }
