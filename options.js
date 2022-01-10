@@ -1,10 +1,14 @@
 var g = document.getElementById("option-list");
+var eq = document.getElementById("equation");
 
 var select_bg = document.getElementById("options-background");
 var option_bg = select_bg.value;
 
 var select_snap = document.getElementById("options-snap");
 var option_snap = select_snap.value;
+
+var checkbox_equation = document.getElementById("show-equation-checkbox");
+var option_equation = checkbox_equation.checked;
 
 var input_vectors = 
 {
@@ -55,6 +59,13 @@ select_bg.addEventListener('change', e => {
 select_snap.addEventListener('change', e => {
     option_snap = select_snap.value;
 });
+
+function showHideEquation()
+{
+    option_equation = checkbox_equation.checked;
+    if (option_equation) eq.style.display = 'flex';
+    else eq.style.display = 'none';
+}
 
 for (const [key_vect, val_vect] of Object.entries(input_vectors)) {
     for (const [key_axis, val_axis] of Object.entries(val_vect)) {
