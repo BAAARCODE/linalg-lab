@@ -75,3 +75,5 @@ for (const [key_vect, val_vect] of Object.entries(input_vectors)) {
         });
     } 
 }
+
+showHideEquation();
