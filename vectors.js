@@ -4,7 +4,27 @@ var ctx = c.getContext("2d");
 c.width = window.innerWidth;
 c.height = window.innerHeight;
 
-const unitLength = 50.0;
+const baseMeasurements = 
+{
+    unitLength: 50.0,
+    vectorWidth: 4,
+    arrowheadLength: 25,
+    originRadius: 5,
+    cursorRadius: 7,
+    cursorStroke: 3,
+    gridline: 1
+};
+var scale = 1;
+var scaledMeasurements =
+{
+    unitLength: baseMeasurements.unitLength * scale,
+    vectorWidth: baseMeasurements.vectorWidth * scale,
+    arrowheadLength: baseMeasurements.arrowheadLength * scale,
+    originRadius: baseMeasurements.originRadius * scale,
+    cursorRadius: baseMeasurements.cursorRadius * scale,
+    cursorStroke: baseMeasurements.cursorStroke * scale,
+    gridline: baseMeasurements.gridline * scale
+}
 
 const origin = {x: 0, y: 0};
 
@@ -18,9 +38,6 @@ var ihat = {x: 1, y: 0};
 var jhat = {x: 0, y: 1};
 
 var scalars = [0, 0];
-
-var vectorWidth = 4;
-var arrowheadLength = 25;
 
 var movingVector = "targetVector";
 
@@ -104,15 +121,15 @@ function redraw(mouseVector)
     
     drawOriginVector(ctx, targetVector, "white", 2);
 
-    fillCircle(ctx, centre.x, centre.y, 5, "white");
+    fillCircle(ctx, centre.x, centre.y, scaledMeasurements.originRadius, "white");
 
     if (movingVector == "none")
     {
-        strokeCircle(ctx, mouseVector.x, mouseVector.y, 7, "rgba(255, 255, 255, 0.4)", 3);
+        strokeCircle(ctx, mouseVector.x, mouseVector.y, scaledMeasurements.cursorRadius, "rgba(255, 255, 255, 0.4)", scaledMeasurements.cursorStroke);
     }
     else if (option_snap != "none")
     {
-        fillCircle(ctx, mouseVector.x, mouseVector.y, 7, "rgba(255, 255, 255, 0.4)");
+        fillCircle(ctx, mouseVector.x, mouseVector.y, scaledMeasurements.cursorRadius, "rgba(255, 255, 255, 0.4)");
     }
 
     if (movingVector != "none" || mouseVector == origin)
@@ -149,12 +166,12 @@ function vectorAdd(u, v)
 
 function toUnits(v)
 {
-    return {x: (v.x - centre.x) / unitLength, y: -(v.y - centre.y) / unitLength};
+    return {x: (v.x - centre.x) / scaledMeasurements.unitLength, y: -(v.y - centre.y) / scaledMeasurements.unitLength};
 }
 
 function toPixels(v)
 {
-    return {x: (v.x * unitLength) + centre.x, y: (v.y * -unitLength) + centre.y}
+    return {x: (v.x * scaledMeasurements.unitLength) + centre.x, y: (v.y * -scaledMeasurements.unitLength) + centre.y}
 }
 
 function linearCombination()
@@ -251,12 +268,12 @@ function drawVector(context, origin, vector, style)
         context,
         uo.x,
         uo.y,
-        u.x + Math.min(vectorLength(vector) * unitLength, arrowheadLength / 2) * Math.cos(angle),
-        u.y + Math.min(vectorLength(vector) * unitLength, arrowheadLength / 2) * Math.sin(angle),
+        u.x + Math.min(vectorLength(vector) * scaledMeasurements.unitLength, scaledMeasurements.arrowheadLength / 2) * Math.cos(angle),
+        u.y + Math.min(vectorLength(vector) * scaledMeasurements.unitLength, scaledMeasurements.arrowheadLength / 2) * Math.sin(angle),
         style,
-        vectorWidth
+        scaledMeasurements.vectorWidth
         );
-    fillArrowHead(context, u.x, u.y, angle, Math.PI / 6, Math.min(arrowheadLength, vectorLength(vector) * unitLength), style);
+    fillArrowHead(context, u.x, u.y, angle, Math.PI / 6, Math.min(scaledMeasurements.arrowheadLength, vectorLength(vector) * scaledMeasurements.unitLength), style);
 }
 
 function vectorLength(v)

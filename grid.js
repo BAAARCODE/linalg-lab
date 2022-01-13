@@ -14,19 +14,19 @@ function drawBackground()
     switch (option_bg)
     {
         case "grid":
-            drawGrid(ihat, jhat, 10, 100, 5, 1);
+            drawGrid(ihat, jhat, 10, 100, scaledMeasurements.vectorWidth, scaledMeasurements.gridline);
             break;
         case "vectors":
             drawOriginVector(gctx, scalarMult(1, u), "#103834");
             drawOriginVector(gctx, scalarMult(1, v), "#402900");
             break;
         case "grid-vectors":
-            drawGrid(ihat, jhat, 10, 100, 5, 1);
+            drawGrid(ihat, jhat, 10, 100, scaledMeasurements.vectorWidth, scaledMeasurements.gridline);
             drawOriginVector(gctx, scalarMult(1, u), "#103834");
             drawOriginVector(gctx, scalarMult(1, v), "#402900");
             break;
         case "coefficient-grid":
-            drawGrid(u, v, 10, 100, 5, 1);
+            drawGrid(u, v, 10, 100, scaledMeasurements.vectorWidth, scaledMeasurements.gridline);
             break;
     }
 }
