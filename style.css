@@ -13,7 +13,7 @@ body, html {
     position: absolute;
     padding: 1em;
     height: 6em;
-    bottom: 0px;
+    bottom: 0;
     width: 100%;
     font-size: 1.5em;
     display: flex;
@@ -63,7 +63,7 @@ input[type="checkbox"] {
 
 select {
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 0.4em;
     display: block;
     font-size: 1em;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -84,9 +84,9 @@ label[for="show-equation-checkbox"] {
 #toggle, #option-list {
     display: inline-block;
     background-color: lightgrey;
-    padding: 5px;
-    margin-top: 5px;
-    margin-right: 5px;
+    padding: 0.3em;
+    margin-top: 0.3em;
+    margin-right: 0.3em;
 }
 
 #toggle {
@@ -100,8 +100,8 @@ label[for="show-equation-checkbox"] {
 #options {
     text-align: right;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 0.3em;
+    right: 0.3em;
 }
 
 canvas {
