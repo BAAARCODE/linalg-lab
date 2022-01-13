@@ -62,6 +62,10 @@ input[type="checkbox"] {
     display: inline;
 }
 
+#scale {
+    width: 97%
+}
+
 select {
     width: 100%;
     margin-bottom: 0.4em;
@@ -74,6 +78,10 @@ label {
     display: block;
     font-size: 1em;
     line-height: 150%;
+}
+
+label[for="scale"] {
+    margin-top: 0.3em;
 }
 
 label[for="show-equation-checkbox"] {
