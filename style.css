@@ -29,6 +29,7 @@ body, html {
 
 .input-basis-vectors {
     display: inline-block;
+    margin-bottom: 0.4em;
 }
 
 .input-vector-label {
