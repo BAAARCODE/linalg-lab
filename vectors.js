@@ -14,7 +14,7 @@ const baseMeasurements =
     cursorStroke: 3,
     gridline: 1
 };
-var scale = 1;
+var scale = option_scale;
 var scaledMeasurements =
 {
     unitLength: baseMeasurements.unitLength * scale,
