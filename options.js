@@ -10,6 +10,9 @@ var option_snap = select_snap.value;
 var checkbox_equation = document.getElementById("show-equation-checkbox");
 var option_equation = checkbox_equation.checked;
 
+var slider_scale = document.getElementById("scale");
+var option_scale = scale.value;
+
 var input_vectors = 
 {
     u:
@@ -58,6 +61,11 @@ select_bg.addEventListener('change', e => {
 
 select_snap.addEventListener('change', e => {
     option_snap = select_snap.value;
+});
+
+slider_scale.addEventListener('input', e => {
+    option_scale = slider_scale.value;
+    updateScale();
 });
 
 function showHideEquation()

@@ -136,6 +136,17 @@ function redraw(mouseVector)
         renderEquation();
 }
 
+function updateScale()
+{
+    scale = option_scale;
+    for (const [key, value] of Object.entries(baseMeasurements))
+    {
+        scaledMeasurements[key] = value * scale;
+    }
+    drawBackground();
+    redraw(toPixels(mouseVect));
+}
+
 function updateVector(vector)
 {
     window[vector].x = option_vectors[vector].x;
