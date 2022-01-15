@@ -1,7 +1,7 @@
 # Linear Algebra Lab
 An interactive demo of concepts in linear algebra.
 
-The current demo uses a fullscreen HTML canvas to draw a linear combination of two 2D vectors, rendering a corresponding equation in KaTeX alongside the 
+The demo currently [live on GitHub Pages](https://BAAARCODE.github.io/linalg-lab) uses a full-screen HTML canvas to draw a linear combination of two 2D vectors, rendering a corresponding equation in KaTeX as the vectors change.
 
 ## Hotkeys
 * **SPACE:** Toggle mouse movement of target vector (w)
